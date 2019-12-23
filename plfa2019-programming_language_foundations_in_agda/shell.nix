@@ -9,8 +9,7 @@ pkgs.mkShell {
   shellHook = ''
 cat << EOF > .agda-lib
 name: resistance-is-futile
-include: ./src
-  ./plfa
+include: .
   ${pkgs.AgdaStdlib}/share/agda/
 EOF
   '';

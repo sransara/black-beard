@@ -1,4 +1,3 @@
 name: resistance-is-futile
-include: ./src
-  ./plfa
-  /nix/store/hg87h67ab6ra1fp4frjawpl3d648mxar-agda-stdlib-1.1/share/agda/
+include: .
+  /nix/store/qmk538bypdk9lgkyb187ai08a16ajba4-agda-stdlib-1.1/share/agda/
