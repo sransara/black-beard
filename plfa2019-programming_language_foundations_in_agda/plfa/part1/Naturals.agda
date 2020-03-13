@@ -4,7 +4,9 @@ data ℕ : Set where
   zero : ℕ
   suc  : ℕ → ℕ
 
+-- begin exercise seven
 -- suc (suc (suc (suc (suc (suc (suc zero))))))
+-- end
 
 {-# BUILTIN NATURAL ℕ #-}
 
@@ -49,6 +51,7 @@ _ =
 _ : 2 + 3 ≡ 5
 _ = refl
 
+-- begin exercise +-example
 _ : 3 + 4 ≡ 7
 _ = begin
     3 + 4
@@ -63,6 +66,7 @@ _ = begin
   ≡⟨⟩
     7
   ∎
+-- end
 
 _*_ : ℕ → ℕ → ℕ
 zero    * n  =  zero
@@ -81,6 +85,7 @@ _ =
     6
   ∎
 
+-- begin exercise *-example
 _ : 3 * 4 ≡ 12
 _ = begin
     3 * 4
@@ -95,10 +100,13 @@ _ = begin
   ≡⟨⟩
     12
   ∎
+-- end
 
+-- begin exercise _^_ example
 _^_ : ℕ → ℕ → ℕ
 m ^ zero  =  1
 m ^ (suc n) = m * (m ^ n)
+-- end
 
 _∸_ : ℕ → ℕ → ℕ
 m     ∸ zero   =  m
@@ -127,6 +135,7 @@ _ =
     0
   ∎
 
+-- begin exercise ∸-example₂
 _ =
   begin
     3 ∸ 5
@@ -139,6 +148,7 @@ _ =
   ≡⟨⟩
     0
   ∎
+-- end
 
 {-# BUILTIN NATPLUS _+_ #-}
 {-# BUILTIN NATTIMES _*_ #-}
@@ -149,6 +159,7 @@ data Bin : Set where
   _O : Bin → Bin
   _I : Bin → Bin
 
+-- begin exercise Bin
 inc : Bin → Bin
 inc ⟨⟩ = ⟨⟩ I
 inc (b O) = b I
@@ -171,5 +182,6 @@ from (b I) = suc ( 2 * (from b))
 
 _ : from (⟨⟩ I O I I) ≡ 11
 _ = refl
+-- end
 
 -- import Data.Nat using (ℕ; zero; suc; _+_; _*_; _^_; _∸_)
