@@ -4,6 +4,7 @@ import Relation.Binary.PropositionalEquality as Eq
 open Eq using (_≡_; refl; cong; sym)
 open Eq.≡-Reasoning using (begin_; _≡⟨⟩_; _≡⟨_⟩_; _∎)
 open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_)
+open import Function using (_∘_)
 
 -- begin exercise operators
 -- 1. (and, or):
@@ -221,6 +222,35 @@ _ =
 -- end
 
 -- begin exercise *-comm
+*-n-zero : ∀ (n : ℕ) → n * zero ≡ zero
+*-n-zero zero = refl
+*-n-zero (suc n) rewrite *-n-zero n = refl
+
+*-m-factor : ∀ (m n : ℕ) → m + m * n ≡ m * suc n
+*-m-factor zero n = refl
+*-m-factor (suc m) n =
+  begin
+    suc (m + (n + m * n))
+  ≡⟨ cong suc (+-swap m n (m * n)) ⟩
+    suc (n + (m + m * n))
+  ≡⟨ cong (suc ∘ (n +_)) (*-m-factor m n) ⟩
+    suc (n + m * suc n)
+  ≡⟨⟩
+    suc n + m * suc n
+  ≡⟨⟩
+    suc m * suc n
+  ∎
+
+*-comm : ∀ (m n : ℕ) → m * n ≡ n * m
+*-comm zero n rewrite *-n-zero n = refl
+*-comm (suc m) n =
+  begin
+    n + m * n
+  ≡⟨ cong (n +_) (*-comm m n)⟩
+    n + n * m
+  ≡⟨ *-m-factor n m ⟩
+    n * suc m
+  ∎
 -- end
 
 -- begin exercise 0∸n≡0
